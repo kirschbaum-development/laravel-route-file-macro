@@ -16,13 +16,10 @@ class RouteFileMacroServiceProvider extends ServiceProvider
     protected function registerRouteFileMacro()
     {
         Route::macro('file', function ($file) {
-            $files = (!is_array($file)) ? [$file] : $file;
-
-            foreach ($files as $file) {
+            collect(array_wrap($file))->each(function ($file) {
                 $path = ($file instanceof SplFileInfo) ? $file->getRealPath() : $file;
-
                 Route::group([], $path);
-            }
+            });
         });
     }
 }
