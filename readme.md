@@ -27,8 +27,8 @@ Route::file(base_path('routes/admin/users.php'));
 
 ```php
 Route::file([
-base_path('routes/admin/posts.php'),
-base_path('routes/admin/users.php')
+    base_path('routes/admin/posts.php'),
+    base_path('routes/admin/users.php')
 ]);
 ```
 
