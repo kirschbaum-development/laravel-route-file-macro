@@ -4,9 +4,10 @@
     "license": "MIT",
     "keywords": [
         "kirschbaum-development",
+        "laravel",
         "laravel-route-file-macro"
     ],
-    "homepage": "https://kirschbaumdevelopment.com",
+    "homepage": "https://github.com/kirschbaum-development/laravel-route-file-macro",
     "support": {
         "issues": "https://github.com/kirschbaum-development/laravel-route-file-macro/issues",
         "source": "https://github.com/kirschbaum-development/laravel-route-file-macro"
@@ -14,17 +15,19 @@
     "authors": [
         {
             "name": "David VanScott",
-            "email": "david@kirschbaumdevelopment.com"
+            "email": "david@kirschbaumdevelopment.com",
+            "role": "Developer"
         },
         {
             "name": "Justin Seliga",
-            "email": "justin@kirschbaumdevelopment.com"
+            "email": "justin@kirschbaumdevelopment.com",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": ">=7.1.3",
-        "illuminate/routing": "5.7.*",
-        "illuminate/support": "5.7.*"
+        "illuminate/routing": ">=5.7",
+        "illuminate/support": ">=5.7"
     },
     "require-dev": {
         "orchestra/testbench": "^3.7",
@@ -47,5 +50,10 @@
                 "KirschbaumDevelopment\\RouteFileMacro\\RouteFileMacroServiceProvider"
             ]
         }
-    }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
