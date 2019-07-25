@@ -32,6 +32,8 @@ Route::file([
 ]);
 ```
 
+**Note:** You can also use a `files` macro as well which will do the same thing as `file`, but will provide a more expressive syntax if you're including multiple route files.
+
 ### `SplFileInfo` Usage
 
 ```php
