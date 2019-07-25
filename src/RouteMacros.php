@@ -3,28 +3,32 @@
 namespace KirschbaumDevelopment\RouteFileMacro;
 
 use SplFileInfo;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
 class RouteMacros
 {
     public function file()
     {
-        return $this->getFiles();
+        return function ($file) {
+            $this->generateRouteGroupForFile($file);
+        };
     }
 
     public function files()
     {
-        return $this->getFiles();
+        return function ($files) {
+            collect($files)->each(function ($file) {
+                $this->generateRouteGroupForFile($file);
+            });
+        };
     }
 
-    protected function getFiles()
+    protected function generateRouteGroupForFile()
     {
         return function ($file) {
-            collect(Arr::wrap($file))->each(function ($file) {
-                $path = ($file instanceof SplFileInfo) ? $file->getRealPath() : $file;
-                Route::group([], $path);
-            });
+            $path = ($file instanceof SplFileInfo) ? $file->getRealPath() : $file;
+
+            Route::group([], $path);
         };
     }
 }
