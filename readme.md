@@ -19,26 +19,29 @@ composer require kirschbaum-development/laravel-route-file-macro
 
 ## Usage
 
+### Single Item
+
+`Route::file` accepts a single file path or `SplFileInfo` object and cannot be used with multiple paths or file objects.
+
 ```php
 Route::file(base_path('routes/admin/users.php'));
+
+$files = File::files(__DIR__.'/routes');
+Route::files($files[0]);
 ```
 
-### Array Usage
+### Multiple Items
+
+`Route::files` accepts an array of file paths or an array of `SplFileInfo` objects and cannot be used with a single path or file object.
 
 ```php
-Route::file([
+Route::files([
     base_path('routes/admin/posts.php'),
     base_path('routes/admin/users.php')
 ]);
-```
 
-**Note:** You can also use a `files` macro as well which will do the same thing as `file`, but will provide a more expressive syntax if you're including multiple route files.
-
-### `SplFileInfo` Usage
-
-```php
 $files = File::files(__DIR__.'/routes');
-Route::file($files);
+Route::files($files);
 ```
 
 ## Changelog
