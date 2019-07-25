@@ -5,6 +5,7 @@ namespace KirschbaumDevelopment\RouteFileMacro\Tests;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
+use KirschbaumDevelopment\RouteFileMacro\RouteFileMacroServiceProvider;
 
 class RouteFileMacroTest extends TestCase
 {
@@ -16,7 +17,7 @@ class RouteFileMacroTest extends TestCase
     }
 
     /** @test **/
-    public function loadsRouteFromFilePath()
+    public function loadsRoutesFromSingleFilePath()
     {
         Route::file(__DIR__ . '/routes/test-route-1.php');
 
@@ -26,7 +27,19 @@ class RouteFileMacroTest extends TestCase
     }
 
     /** @test **/
-    public function loadsMultipleRoutesFromAnArrayOfFilePaths()
+    public function loadsRoutesFromSingleFileInfoObject()
+    {
+        $file = File::files(__DIR__ . '/routes');
+
+        Route::file($file[0]);
+
+        $this->refreshNamedRoutes();
+
+        $this->assertTrue(Route::has('test-route-1'));
+    }
+
+    /** @test **/
+    public function loadsRoutesFromMultipleFilePaths()
     {
         Route::files([
             __DIR__ . '/routes/test-route-1.php',
@@ -40,7 +53,7 @@ class RouteFileMacroTest extends TestCase
     }
 
     /** @test **/
-    public function loadsRouteFilesFromFileObject()
+    public function loadsRoutesFromMultipleFileInfoObjects()
     {
         $files = File::files(__DIR__ . '/routes');
 
@@ -54,7 +67,7 @@ class RouteFileMacroTest extends TestCase
 
     protected function getPackageProviders($app)
     {
-        return ['KirschbaumDevelopment\RouteFileMacro\RouteFileMacroServiceProvider'];
+        return [RouteFileMacroServiceProvider::class];
     }
 
     protected function refreshNamedRoutes()
