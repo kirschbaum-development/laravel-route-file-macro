@@ -5,6 +5,7 @@
     "keywords": [
         "kirschbaum-development",
         "laravel",
+        "laravel-route",
         "laravel-route-file-macro"
     ],
     "homepage": "https://github.com/kirschbaum-development/laravel-route-file-macro",
