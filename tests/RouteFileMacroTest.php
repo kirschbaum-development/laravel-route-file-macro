@@ -65,11 +65,23 @@ class RouteFileMacroTest extends TestCase
         $this->assertTrue(Route::has('test-route-2'));
     }
 
+    /**
+     * Get package providers.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return array
+     */
     protected function getPackageProviders($app)
     {
         return [RouteFileMacroServiceProvider::class];
     }
 
+    /**
+     * Refresh the named routes.
+     *
+     * @return void
+     */
     protected function refreshNamedRoutes()
     {
         app('router')->getRoutes()->refreshNameLookups();

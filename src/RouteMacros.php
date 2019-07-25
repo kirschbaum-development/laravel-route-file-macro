@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Route;
 
 class RouteMacros
 {
+    /**
+     * Load routes from a file.
+     *
+     * @return \Closure
+     */
     public function file()
     {
         return function ($file) {
@@ -14,6 +19,11 @@ class RouteMacros
         };
     }
 
+    /**
+     * Load routes from multiple files.
+     *
+     * @return \Closure
+     */
     public function files()
     {
         return function ($files) {
@@ -23,6 +33,11 @@ class RouteMacros
         };
     }
 
+    /**
+     * Generate the route group for a the passed file.
+     *
+     * @return \Closure
+     */
     protected function generateRouteGroupForFile()
     {
         return function ($file) {
