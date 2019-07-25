@@ -5,24 +5,21 @@ namespace KirschbaumDevelopment\RouteFileMacro\Tests;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
+use KirschbaumDevelopment\RouteFileMacro\RouteFileMacroServiceProvider;
 
 class RouteFileMacroTest extends TestCase
 {
-    protected function getPackageProviders($app)
-    {
-        return ['KirschbaumDevelopment\RouteFileMacro\RouteFileMacroServiceProvider'];
-    }
-
     /** @test */
-    public function it_provides_route_file_macro()
+    public function hasTheRouteFileMacros()
     {
         $this->assertTrue(Route::hasMacro('file'));
+        $this->assertTrue(Route::hasMacro('files'));
     }
 
     /** @test **/
-    public function it_loads_a_route_from_a_file_path()
+    public function loadsRoutesFromSingleFilePath()
     {
-        Route::file(__DIR__.'/routes/test-route-1.php');
+        Route::file(__DIR__ . '/routes/test-route-1.php');
 
         $this->refreshNamedRoutes();
 
@@ -30,11 +27,23 @@ class RouteFileMacroTest extends TestCase
     }
 
     /** @test **/
-    public function it_loads_multiple_routes_from_an_array_of_file_paths()
+    public function loadsRoutesFromSingleFileInfoObject()
     {
-        Route::file([
-            __DIR__.'/routes/test-route-1.php',
-            __DIR__.'/routes/test-route-2.php',
+        $file = File::files(__DIR__ . '/routes');
+
+        Route::file($file[0]);
+
+        $this->refreshNamedRoutes();
+
+        $this->assertTrue(Route::has('test-route-1'));
+    }
+
+    /** @test **/
+    public function loadsRoutesFromMultipleFilePaths()
+    {
+        Route::files([
+            __DIR__ . '/routes/test-route-1.php',
+            __DIR__ . '/routes/test-route-2.php',
         ]);
 
         $this->refreshNamedRoutes();
@@ -44,16 +53,21 @@ class RouteFileMacroTest extends TestCase
     }
 
     /** @test **/
-    public function it_loads_route_files_from_a_file_object()
+    public function loadsRoutesFromMultipleFileInfoObjects()
     {
-        $files = File::files(__DIR__.'/routes');
+        $files = File::files(__DIR__ . '/routes');
 
-        Route::file($files);
+        Route::files($files);
 
         $this->refreshNamedRoutes();
 
         $this->assertTrue(Route::has('test-route-1'));
         $this->assertTrue(Route::has('test-route-2'));
+    }
+
+    protected function getPackageProviders($app)
+    {
+        return [RouteFileMacroServiceProvider::class];
     }
 
     protected function refreshNamedRoutes()
