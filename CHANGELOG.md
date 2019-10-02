@@ -2,7 +2,7 @@
 
 All notable changes to `laravel-route-file-macro` will be documented in this file.
 
-## 0.2.0 - 2019-09-13
+## 0.2.0 - 2019-10-02
 
 - Support for Laravel 6
 
