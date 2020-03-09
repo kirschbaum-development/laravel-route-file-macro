@@ -2,7 +2,7 @@
 
 All notable changes to `laravel-route-file-macro` will be documented in this file.
 
-## 0.3.0 - 2020-03-07
+## 0.3.0 - 2020-03-09
 
 - Support for Laravel 7
 
