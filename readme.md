@@ -9,6 +9,8 @@ This package allows you to load a routes file directly from the Laravel `Router`
 
 This package requires Laravel 5.7 or higher.
 
+__Due to Laravel 7's PHP version requirement, if you need support for PHP 7.1, please use version 0.2 of the package.__
+
 ## Installation
 
 You can install this macro via composer:
